@@ -25,8 +25,8 @@ from telethon.tl.functions.users import GetFullUserRequest
 from youtubesearchpython import VideosSearch
 
  
-fotoplay = "https://telegra.ph/file/b6402152be44d90836339.jpg"
-ngantri = "https://telegra.ph/file/b6402152be44d90836339.jpg"
+fotoplay = "https://telegra.ph/file/5f3090a61ad28947d3913.jpg"
+ngantri = "https://telegra.ph/file/5f3090a61ad28947d3913.jpg"
 from JE313P import call_py, JE313P, client as Client
 owner = "705475246"
 from JE313P.helpers.yt_dlp import bash
@@ -130,7 +130,7 @@ btnn =[
 
 
 #play
-@JE313P.on(events.NewMessage(pattern="^[?!/]تشغيل"))
+@JE313P.on(events.NewMessage(pattern="^[?!/]play"))
 async def play(event):
     title = ' '.join(event.text[5:])
     replied = await event.get_reply_message()
@@ -149,7 +149,7 @@ async def play(event):
     ):
         return await event.client.send_file(chat_id, Config.CMD_IMG, caption="**يجب عليك كتابة عنوان الشيء الذي تريد تشغيله**\n\n **مثال**: `!تشغيل سورة الكهف`", buttons=btnn)
     elif replied and not replied.audio and not replied.voice or not replied:
-        botman = await event.reply("يتم التعرف على البيانات انتظر . . .")
+        botman = await event.reply("اهدا بشغل اهو. . .")
         query = event.text.split(maxsplit=1)[1]
         search = ytsearch(query)
         if search == 0:
@@ -172,7 +172,7 @@ async def play(event):
                 await botman.edit(f"`{ytlink}`")
             elif chat_id in QUEUE:
                 pos = add_to_queue(chat_id, songname, ytlink, url, "Audio", 0)
-                caption = f"- **ت مالاضافة الى قائمة التشغيل»** `#{pos}`\n\n**🏷 العنوان:** [{songname}]({url})\n**⏱ المدة:** `{duration}`\n🎧 **طلب من:** {from_user}"
+                caption = f"- **ت مالاضافة الى قائمة التشغيل»** `#{pos}`\n\n**🏷 العنوان:** [{songname}]({url})\n**⏱ المدة:** `{duration}`\n🎧 **الطب الى:** {from_user}"
                 await botman.delete()
                 await event.client.send_file(chat_id, thumb, caption=caption, buttons=btnn)
             else:
@@ -185,7 +185,7 @@ async def play(event):
                         stream_type=StreamType().pulse_stream,
                     )
                     add_to_queue(chat_id, songname, ytlink, url, "Audio", 0)
-                    caption = f"🏷 **العنوان:** [{songname}]({url})\n**⏱ المدة:** `{duration}`\n💡 **الحالة:** شغالة الان\n🎧 **طلب من:** {from_user}"
+                    caption = f"🏷 **العنوان:** [{songname}]({url})\n**⏱ المدة:** `{duration}`\n💡 **الحالة:** شغالة الان\n🎧 **الطب الى:** {from_user}"
                     await botman.delete()
                     await event.client.send_file(chat_id, thumb, caption=caption, buttons=btnn)
                 except Exception as ep:
@@ -227,7 +227,7 @@ async def play(event):
 
 
 #end
-@JE313P.on(events.NewMessage(pattern="^[/?!]انهاء"))
+@JE313P.on(events.NewMessage(pattern="^[/?!]end"))
 @is_admin
 async def vc_end(event, perm):
     chat_id = event.chat_id
@@ -245,7 +245,7 @@ async def vc_end(event, perm):
 
 
 
-@JE313P.on(events.NewMessage(pattern="^[?!/]فيديو"))
+@JE313P.on(events.NewMessage(pattern="^[?!/]vplay"))
 async def vplay(event):
     if Config.HEROKU_MODE == "ENABLE":
         await event.reply("- لا يمكنك استخدام هذا الامر لانك تستخدم هيروكو في التنصيب")
@@ -408,7 +408,7 @@ async def vplay(event):
 
 
 #playlist
-@JE313P.on(events.NewMessage(pattern="^[?!/]التشغيل"))
+@JE313P.on(events.NewMessage(pattern="^[?!/]شغل"))
 @is_admin
 async def vc_playlist(event, perm):
     chat_id = event.chat_id
@@ -438,7 +438,7 @@ async def vc_playlist(event, perm):
 
 
 #كود المغادرة
-@JE313P.on(events.NewMessage(pattern="^[?!/]مغادرة"))
+@JE313P.on(events.NewMessage(pattern="^[?!/]leave"))
 @is_admin
 async def leavevc(event, perm):
     razan = await event.reply("- يرجى الانتظار قليلا")
@@ -455,7 +455,7 @@ async def leavevc(event, perm):
 
 
 
-@JE313P.on(events.NewMessage(pattern="^[?!/]تخطي"))
+@JE313P.on(events.NewMessage(pattern="^[?!/]skip"))
 @is_admin
 async def vc_skip(event, perm):
     chat_id = event.chat_id
@@ -484,7 +484,7 @@ async def vc_skip(event, perm):
             await event.reply(DELQUE)
 
 
-@JE313P.on(events.NewMessage(pattern="^[?!/]ايقاف"))
+@JE313P.on(events.NewMessage(pattern="^[?!/]Pause"))
 @is_admin
 async def vc_pause(event, perm):
     chat_id = event.chat_id
@@ -499,7 +499,7 @@ async def vc_pause(event, perm):
 
 
 
-@JE313P.on(events.NewMessage(pattern="^[?!/]استئناف"))
+@JE313P.on(events.NewMessage(pattern="^[?!/]Playlist"))
 @is_admin
 async def vc_resume(event, perm):
     chat_id = event.chat_id
